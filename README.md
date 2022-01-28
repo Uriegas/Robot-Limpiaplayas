@@ -21,3 +21,7 @@ Para correr con interfaz gráfica corra el comando solo:
 ```
 python vcleaner.py
 ```
+
+## Reference
+1. https://docs.python.org/dev/library/argparse.html
+2. https://stackoverflow.com/questions/58976607/restrict-input-string-length-in-argparse-add-argument
