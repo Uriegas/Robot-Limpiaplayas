@@ -4,12 +4,12 @@ Simulador de un robot limpia playas
 ## Linea de Comandos
 Para correr el programa solo por linea de comandos incluya los argumentos `-r` y `-p` como en el ejemplo:
 ```
-python vcleaner.py -r "1, 0, 1" -p 2
+python vcleaner.py -r 1 0 1 -p 2
 ```
 
 La estructura es la siguiente:
 ```
-python vcleaner.py -r <rooms in quotes> -p <agent position>
+python vcleaner.py -r <room> <room> <room> -p <agent position>
 ```
 
 Para obtener ayuda ejecute:
@@ -17,6 +17,7 @@ Para obtener ayuda ejecute:
 python vcleaner.py -h
 ```
 
+## Interfaz Gráfica
 Para correr con interfaz gráfica corra el comando solo:
 ```
 python vcleaner.py
