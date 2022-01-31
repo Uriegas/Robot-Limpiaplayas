@@ -18,7 +18,7 @@ python vcleaner.py -h
 ```
 
 ## Interfaz Gráfica
-Para correr con interfaz gráfica corra el comando solo:
+Para correr con interfaz gráfica corra el comando sin argumentos:
 ```
 python vcleaner.py
 ```
