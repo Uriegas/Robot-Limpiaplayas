@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from Agent import Actions, Agent
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -34,6 +36,7 @@ class Ui_Dialog(object):
         self.pushButton.setGeometry(QtCore.QRect(100, 290, 75, 23))
         self.pushButton.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.clean)
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(30, 210, 121, 16))
         self.label_2.setStyleSheet("font: 11pt \"MS Shell Dlg 2\";\n"
@@ -75,10 +78,11 @@ class Ui_Dialog(object):
         self.label_7.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label_7.setText("")
         self.label_7.setObjectName("label_7")
-        self.tableView = QtWidgets.QTableView(Dialog)
-        self.tableView.setGeometry(QtCore.QRect(250, 90, 231, 241))
-        self.tableView.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.tableView.setObjectName("tableView")
+        self.textArea = QtWidgets.QPlainTextEdit(Dialog)
+        self.textArea.setReadOnly(True)
+        self.textArea.setGeometry(QtCore.QRect(250, 90, 231, 241))
+        self.textArea.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.textArea.setObjectName("textArea")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -102,9 +106,25 @@ class Ui_Dialog(object):
         self.comboBox_2.setItemText(7, _translate("Dialog", "1,1,1"))
         self.label_3.setText(_translate("Dialog", "Robot Limpiador de Playas"))
         self.label_4.setText(_translate("Dialog", "Movimientos realizados:"))
+    def clean(self):
+        self.textArea.clear()
+        self.textArea.appendPlainText("Movimientos realizados:\n")
+        
+        agent = Agent( position=self.comboBox.currentIndex() )
+        # Convert selected items to a list of ints
+        environment = [int(i) for i in self.comboBox_2.currentText().split(',')]
+        actions = agent.get_action(environment=environment, position=self.comboBox.currentIndex())
+        for action in actions:
+            if action == Actions.left:
+                self.textArea.insertPlainText("⇐ Izquierda\n")
+            elif action == Actions.right:
+                self.textArea.insertPlainText("⇒ Derecha\n")
+            elif action == Actions.suck:
+                self.textArea.insertPlainText("✓ Succionar\n")
+        self.textArea.insertPlainText("👌 Cuartos Limpios\n")
 
 
-if __name__ == "__main__":
+def run():
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
